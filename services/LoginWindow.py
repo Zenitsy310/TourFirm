@@ -1,3 +1,2 @@
-
-def registrationUser():
+def registrationUser(login, password):
     pass

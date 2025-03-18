@@ -1,16 +1,17 @@
 import PyQt6
-from PyQt6.QtWidgets import QMainWindow, QPushButton, QGridLayout
+from PyQt6.QtWidgets import QMainWindow, QPushButton, QGridLayout, QWidget
 
 
-class Window(QMainWindow):
+class Window(QWidget):
     def __init__(self):
         super().__init__()
 
         self.setWindowTitle("TourFirm")
-        self.setFixedSize(600, 600)
+        self.window_width, self.window_height = 800, 500
+        self.setFixedSize(self.window_width, self.window_height)
 
-        self.lay = QGridLayout()
-        self.setLayout(self.lay)
+        self.layout = QGridLayout()
+        self.setLayout(self.layout)
 
 
 
