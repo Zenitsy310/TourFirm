@@ -1,26 +1,30 @@
 import mysql.connector
-
-def __init__(self):
-    self.cursor = mysql.connector.connect().cursor()
+from mysql.connector import Error
 
 
+class sql_work:
+    _connection = None
+    _cursor = None
 
-def startApp(self):
-    try:
-        db = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="tourfirm"
-        )
-        self.cursor = db.cursor()
-        #print(db)
-    except ValueError as e:
-        #print(e)
-        pass
+    @classmethod
+    def startApp(cls):
+        try:
+            cls._connection = mysql.connector.connect(
+                host="localhost",
+                user="Kokushibo",
+                password="oleg75270",
+                database="tourfirm"
+            )
+
+            cls._cursor = cls._connection.cursor()
+        except Error as e:
+            #print(f"Error while connecting to MySQL: {e}")
+            pass
+
+    @classmethod
+    def auth(cls, login, password):
+        cls._cursor.execute("SELECT * FROM client WHERE login = %s AND password = %s", (login, password))
+        return cls._cursor.fetchall()
 
 
-def auth(login, password):
-    query = ('''SELECT login, password FROM Clients WHERE login =(?) AND password =(?)''',
-             (login, password))
-    #cursor.execute()
+
